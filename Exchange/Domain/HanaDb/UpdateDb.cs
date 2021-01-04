@@ -12,14 +12,15 @@ namespace Exchange.Domain.HanaDb
     class UpdateDb
     {
         readonly Company DbConnection;
+        SAPbobsCOM.SBObob bo;
         public UpdateDb()
         {
             DbConnection = HanaDbConnection.DbConnection();
+            bo=(SBObob)DbConnection.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoBridge);
         }
 
     public  void UpdateCurrency(ValCurs Currency)
         {
-            SAPbobsCOM.SBObob bo = (SBObob)DbConnection.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoBridge);
             foreach (var item in Currency.ValType[1].Valute)
             {
                 switch (item.Code)
